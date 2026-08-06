@@ -6,7 +6,7 @@
 
 **Spring Boot Starter，集成 spring-ai-model-hermes**
 
-[![Maven Central](https://img.shields.io/maven-central/v/io.github.easy4j/spring-ai-starter-model-hermes)](https://github.com/easy-4-java/spring-ai-starter-model-hermes)
+[![Maven Central](https://img.shields.io/maven-central/v/io.github.partmeai/spring-ai-starter-model-hermes)](https://github.com/partme-ai/spring-ai-starter-model-hermes)
 [![Java](https://img.shields.io/badge/Java-17-orange)](#3-运行要求与兼容性)
 [![License](https://img.shields.io/badge/license-Apache-2.0-green)](https://www.apache.org/licenses/LICENSE-2.0)
 
@@ -23,7 +23,7 @@
 
 > **当前版本**：`3.5.x.20260623-SNAPSHOT`<br>
 > **JDK 基线**：`17`<br>
-> **Group ID**：`io.github.easy4j`<br>
+> **Group ID**：`io.github.partmeai`<br>
 > **Artifact ID**：`spring-ai-starter-model-hermes`<br>
 > **许可证**：Apache License 2.0<br>
 
@@ -37,7 +37,7 @@
 | 消费方 | 使用 spring-ai-model-hermes 的 Spring Boot 应用 |
 | 核心能力 | 自动装配、属性绑定、开箱即用的 spring-ai-model-hermes Bean |
 | JDK | `17` |
-| 坐标 | `io.github.easy4j:spring-ai-starter-model-hermes:3.5.x.20260623-SNAPSHOT` |
+| 坐标 | `io.github.partmeai:spring-ai-starter-model-hermes:3.5.x.20260623-SNAPSHOT` |
 | 配置前缀 | `spring.ai.model.hermes` |
 
 ## 2. 核心能力
@@ -78,7 +78,7 @@ Starter 自动装配以下 Bean：
 
 ```xml
 <dependency>
-    <groupId>io.github.easy4j</groupId>
+    <groupId>io.github.partmeai</groupId>
     <artifactId>spring-ai-starter-model-hermes</artifactId>
     <version>3.5.x.20260623-SNAPSHOT</version>
 </dependency>
@@ -168,6 +168,6 @@ mvn -pl spring-ai-starter-model-hermes -am test
 
 <div align="center">
 
-[返回顶部](#readme-top) · [问题反馈](https://github.com/easy-4-java/spring-ai-starter-model-hermes/issues) · [仓库地址](https://github.com/easy-4-java/spring-ai-starter-model-hermes)
+[返回顶部](#readme-top) · [问题反馈](https://github.com/partme-ai/spring-ai-starter-model-hermes/issues) · [仓库地址](https://github.com/partme-ai/spring-ai-starter-model-hermes)
 
 </div>

@@ -6,7 +6,7 @@
 
 **Spring Boot Starter for spring-ai-model-hermes**
 
-[![Maven Central](https://img.shields.io/maven-central/v/io.github.easy4j/spring-ai-starter-model-hermes)](https://github.com/easy-4-java/spring-ai-starter-model-hermes)
+[![Maven Central](https://img.shields.io/maven-central/v/io.github.partmeai/spring-ai-starter-model-hermes)](https://github.com/partme-ai/spring-ai-starter-model-hermes)
 [![Java](https://img.shields.io/badge/Java-17-orange)](#3-requirements-and-compatibility)
 [![License](https://img.shields.io/badge/license-Apache-2.0-green)](https://www.apache.org/licenses/LICENSE-2.0)
 
@@ -23,7 +23,7 @@
 
 > **Current Version**：`3.5.x.20260623-SNAPSHOT`<br>
 > **JDK Baseline**：`17`<br>
-> **Group ID**：`io.github.easy4j`<br>
+> **Group ID**：`io.github.partmeai`<br>
 > **Artifact ID**：`spring-ai-starter-model-hermes`<br>
 > **License**：Apache License 2.0<br>
 
@@ -37,7 +37,7 @@
 | Consumers | Spring Boot applications using spring-ai-model-hermes |
 | Core Capabilities | auto-configuration, property binding, ready-to-use beans for spring-ai-model-hermes |
 | JDK | `17` |
-| Coordinates | `io.github.easy4j:spring-ai-starter-model-hermes:3.5.x.20260623-SNAPSHOT` |
+| Coordinates | `io.github.partmeai:spring-ai-starter-model-hermes:3.5.x.20260623-SNAPSHOT` |
 | Config Prefix | `spring.ai.model.hermes` |
 
 ## 2. Core Capabilities
@@ -78,7 +78,7 @@ Auto-configuration registration:
 
 ```xml
 <dependency>
-    <groupId>io.github.easy4j</groupId>
+    <groupId>io.github.partmeai</groupId>
     <artifactId>spring-ai-starter-model-hermes</artifactId>
     <version>3.5.x.20260623-SNAPSHOT</version>
 </dependency>
@@ -168,6 +168,6 @@ This project is licensed under the [Apache License, Version 2.0](https://www.apa
 
 <div align="center">
 
-[Back to top](#readme-top) · [Issues](https://github.com/easy-4-java/spring-ai-starter-model-hermes/issues) · [Repository](https://github.com/easy-4-java/spring-ai-starter-model-hermes)
+[Back to top](#readme-top) · [Issues](https://github.com/partme-ai/spring-ai-starter-model-hermes/issues) · [Repository](https://github.com/partme-ai/spring-ai-starter-model-hermes)
 
 </div>
