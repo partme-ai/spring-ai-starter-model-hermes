@@ -1,94 +1,173 @@
-# Spring AI Hermes Starter
+<a id="readme-top"></a>
 
-Spring Boot Starter for [Hermes Gateway](https://github.com/nousresearch/hermes-agent) integration with Spring AI.
+<div align="center">
 
-## Features
+# spring-ai-starter-model-hermes
 
-- **Chat Completions API** - OpenAI-compatible `/v1/chat/completions` endpoint
-- **Responses API** - Enhanced responses via `/v1/responses`
-- **Session Management** - `X-Hermes-Session-Key` for stable memory scoping
-- **Session Tracking** - `X-Hermes-Session-Id` for transcript-scoped sessions
-- **Tool Calling** - Function calling support
-- **Thinking Control** - Configure model thinking behavior
+**Spring Boot Starter for spring-ai-model-hermes**
 
-## Dependencies
+[![Maven Central](https://img.shields.io/maven-central/v/io.github.easy4j/spring-ai-starter-model-hermes)](https://github.com/easy-4-java/spring-ai-starter-model-hermes)
+[![Java](https://img.shields.io/badge/Java-17-orange)](#3-requirements-and-compatibility)
+[![License](https://img.shields.io/badge/license-Apache-2.0-green)](https://www.apache.org/licenses/LICENSE-2.0)
+
+[简体中文](./README.zh-CN.md) | [English](./README.md)
+
+[Positioning](#1-positioning) · [Capabilities](#2-core-capabilities) ·
+[Dependency](#5-dependency) · [Quick Start](#6-quick-start) ·
+[Configuration](#7-configuration-reference) · [Versions](#9-version-lines-and-compatibility) ·
+[Build](#10-build-and-test) · [License](#12-license)
+
+</div>
+
+---
+
+> **Current Version**：`3.5.x.20260623-SNAPSHOT`<br>
+> **JDK Baseline**：`17`<br>
+> **Group ID**：`io.github.easy4j`<br>
+> **Artifact ID**：`spring-ai-starter-model-hermes`<br>
+> **License**：Apache License 2.0<br>
+
+## 1. Positioning
+
+**spring-ai-starter-model-hermes** is a Spring Boot starter that integrates **spring-ai-model-hermes** for applications using spring-ai-model-hermes. It provides auto-configuration, property binding, and ready-to-use beans so that applications can consume spring-ai-model-hermes capabilities with minimal setup.
+
+| Dimension | Description |
+|---|---|
+| Type | Spring Boot Starter |
+| Consumers | Spring Boot applications using spring-ai-model-hermes |
+| Core Capabilities | auto-configuration, property binding, ready-to-use beans for spring-ai-model-hermes |
+| JDK | `17` |
+| Coordinates | `io.github.easy4j:spring-ai-starter-model-hermes:3.5.x.20260623-SNAPSHOT` |
+| Config Prefix | `spring.ai.model.hermes` |
+
+## 2. Core Capabilities
+
+| Capability | Status | Description |
+|---|:---:|---|
+| Auto-configuration | ✅ Stable | Registers spring-ai-model-hermes beans automatically |
+| Property Binding | ✅ Stable | Binds `spring.ai.model.hermes.*` to `OpenClawSpringAiProperties` |
+| `OpenClawApi` bean | ✅ Stable | Auto-registered via OpenClawSpringAiAutoConfiguration |
+
+## 3. Requirements and Compatibility
+
+| Dependency | Minimum | Evidence |
+|---|---:|---|
+| JDK | `17` | `pom.xml` |
+| Spring Boot | `3.5.0` | `pom.xml` parent |
+| Maven | `3.6+` | Maven Enforcer |
+
+## 4. Auto-configuration
+
+The starter auto-configures the following beans:
+
+| Bean | Condition | Missing Behavior |
+|---|---|---|
+| `OpenClawApi` | classpath + property | not created |
+| `OpenClawResponsesApi` | classpath + property | not created |
+| `OpenClawChatOptions` | classpath + property | not created |
+| `ChatModel` | classpath + property | not created |
+| `EmbeddingModel` | classpath + property | not created |
+| `OpenClawResponsesModel` | classpath + property | not created |
+
+Auto-configuration registration:
+
+- `META-INF/spring/org.springframework.boot.autoconfigure.AutoConfiguration.imports` (Spring Boot 2.7+ / 3.x / 4.x)
+- `META-INF/spring.factories` (Spring Boot 2.x legacy)
+
+## 5. Dependency
 
 ```xml
 <dependency>
-    <groupId>io.github.partmeai</groupId>
+    <groupId>io.github.easy4j</groupId>
     <artifactId>spring-ai-starter-model-hermes</artifactId>
     <version>3.5.x.20260623-SNAPSHOT</version>
 </dependency>
 ```
 
-## Configuration
+No additional easy4j component dependencies.
+
+## 6. Quick Start
+
+### 6.1 Add dependency
+
+Add the dependency above to your `pom.xml`.
+
+### 6.2 Configure
 
 ```yaml
-spring:
-  ai:
-    hermes:
-      enabled: true
-      base-url: http://localhost:8000
-      api-key: your-api-key
-      model: hermes-agent
-      session-key: channel-123
-      chat:
-        temperature: 0.7
-        max-tokens: 2048
+spring.ai.model.hermes:
+  enabled: true
 ```
 
-### Configuration Properties
-
-| Property | Type | Default | Description |
-|----------|------|---------|-------------|
-| `spring.ai.hermes.enabled` | boolean | `true` | Enable/disable auto-configuration |
-| `spring.ai.hermes.base-url` | String | `http://localhost:8000` | Hermes Gateway URL |
-| `spring.ai.hermes.api-key` | String | - | Bearer token for auth |
-| `spring.ai.hermes.model` | String | `hermes-agent` | Model identifier |
-| `spring.ai.hermes.session-key` | String | - | Stable memory scoping key (max 256 chars) |
-| `spring.ai.hermes.session-id` | String | - | Transcript-scoped session ID |
-| `spring.ai.hermes.chat.temperature` | Double | - | Sampling temperature |
-| `spring.ai.hermes.chat.max-tokens` | Integer | - | Max tokens |
-| `spring.ai.hermes.chat.top-p` | Double | - | Nucleus sampling probability |
-| `spring.ai.hermes.chat.frequency-penalty` | Double | - | Frequency penalty |
-| `spring.ai.hermes.chat.presence-penalty` | Double | - | Presence penalty |
-| `spring.ai.hermes.chat.stop` | List<String> | - | Stop sequences |
-
-## Usage
-
-### ChatModel
+### 6.3 Use the bean
 
 ```java
-@Autowired
-private ChatModel chatModel;
-
-public String chat(String message) {
-    ChatResponse response = chatModel.call(new UserMessage(message));
-    return response.getResult().getOutput().getText();
+@SpringBootApplication
+public class Application {
+    public static void main(String[] args) {
+        SpringApplication.run(Application.class, args);
+    }
 }
 ```
 
-### Session-based Chat
-
-Configure session key for stable memory scoping:
-
-```yaml
-spring:
-  ai:
-    hermes:
-      session-key: user-123-channel-abc
-```
-
-### Tool Calling
+Then inject the auto-configured bean in your code:
 
 ```java
-ChatOptions options = HermesChatOptions.builder()
-    .tools(myToolCallback)
-    .build();
-
-ChatResponse response = chatModel.call(new Prompt(prompt, options));
+@Autowired
+private OpenClawApi openClawApi;
 ```
 
-## License
+## 7. Configuration Reference
 
-Apache License 2.0
+### 7.1 Config Prefix
+
+`spring.ai.model.hermes`
+
+### 7.2 Configuration Items
+
+| Property | Type | Default | Required | Description | Sensitive |
+|---|---|---|:---:|---|:---:|
+| `spring.ai.model.hermes.enabled` | boolean | `true` | No | Enable the starter | No |
+<!-- additional properties below -->
+
+## 8. Version Lines and Compatibility
+
+| Branch | JDK | Spring Boot | Component Version | Status |
+|---|---:|---:|---|:---:|
+| `2.3.x` / `2.7.x` | `8+` | 2.3.x / 2.7.x | `1.0.x` | Maintenance |
+| `3.0.x` ~ `3.5.x` | `17` | 3.x | `2.0.x` | Maintenance |
+| `4.0.x` / `4.1.x` | `17+` | 4.x | `3.0.x` | Active |
+
+## 9. Build and Test
+
+```bash
+mvn clean verify
+mvn -pl spring-ai-starter-model-hermes -am test
+```
+
+## 10. Troubleshooting
+
+| Symptom | Diagnosis | Resolution |
+|---|---|---|
+| Bean not created | Check auto-configuration report | Verify `spring.ai.model.hermes.enabled=true` and classpath |
+| `ClassNotFoundException` | Missing dependency | Add the required module |
+| Version conflict | `mvn dependency:tree` | Use BOM for version alignment |
+
+## 11. Contribution
+
+1. Fork the repository.
+2. Create a feature branch.
+3. Run `mvn clean verify` before submitting.
+4. Submit a pull request.
+
+## 12. License
+
+This project is licensed under the [Apache License, Version 2.0](https://www.apache.org/licenses/LICENSE-2.0).
+
+---
+
+<div align="center">
+
+[Back to top](#readme-top) · [Issues](https://github.com/easy-4-java/spring-ai-starter-model-hermes/issues) · [Repository](https://github.com/easy-4-java/spring-ai-starter-model-hermes)
+
+</div>
