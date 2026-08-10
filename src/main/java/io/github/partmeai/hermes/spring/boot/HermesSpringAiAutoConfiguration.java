@@ -72,18 +72,18 @@ public class HermesSpringAiAutoConfiguration {
     /**
      * 创建 Spring AI Hermes 聊天模型适配器。
      *
-     * @param api Hermes HTTP API 客户端
+     * @param hermesApiProvider Hermes HTTP API 客户端
      * @param properties 默认模型与会话配置
-     * @param toolCallingManager Spring AI 工具调用管理器
-     * @param observationRegistry Micrometer 观测注册表
+     * @param observationRegistryProvider Spring AI 工具调用管理器
+     * @param toolCallingManagerProvider Spring AI 工具调用管理器
      * @return 配置完成的 Hermes 聊天模型
      */
     @Bean
     @ConditionalOnMissingBean
-    public HermesChatModel hermesChatModel(HermesApi api,
-                                           HermesSpringAiProperties properties,
-                                           ToolCallingManager toolCallingManager,
-                                           ObservationRegistry observationRegistry) {
+    public HermesChatModel hermesChatModel(ObjectProvider<HermesApi> hermesApiProvider,
+                                           ObjectProvider<ObservationRegistry> observationRegistryProvider,
+                                           ObjectProvider<ToolCallingManager> toolCallingManagerProvider,
+                                           HermesSpringAiProperties properties) {
         HermesChatOptions defaultOptions = HermesChatOptions.builder()
             .model(properties.getModel())
             .hermesSessionKey(properties.getSessionKey())
@@ -91,10 +91,10 @@ public class HermesSpringAiAutoConfiguration {
             .build();
         log.info("Creating HermesChatModel bean (model={})", defaultOptions.getModel());
         return HermesChatModel.builder()
-            .api(api)
+            .api(hermesApiProvider.getIfAvailable())
             .defaultOptions(defaultOptions)
-            .toolCallingManager(toolCallingManager)
-            .observationRegistry(observationRegistry)
+            .toolCallingManager(toolCallingManagerProvider.getIfAvailable())
+            .observationRegistry(observationRegistryProvider.getIfAvailable())
             .build();
     }
 
