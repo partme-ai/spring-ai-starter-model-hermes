@@ -5,13 +5,13 @@
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
-        <version>3.5.5</version>
+        <version>4.1.0</version>
         <relativePath />
     </parent>
 
     <groupId>io.github.partmeai</groupId>
     <artifactId>spring-ai-starter-model-hermes</artifactId>
-    <version>3.5.x.20260630-SNAPSHOT</version>
+    <version>4.1.x.20260630-SNAPSHOT</version>
     <name>${project.groupId}:${project.artifactId}</name>
     <description>Spring Boot Starter for Spring AI Hermes Model</description>
     <url>https://github.com/partme-ai/${project.artifactId}</url>
@@ -49,7 +49,7 @@
 
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <maven.compiler.proc>full</maven.compiler.proc>
-        <spring-ai-hermes.version>1.0.x.20260630-SNAPSHOT</spring-ai-hermes.version>
+        <spring-ai-hermes.version>2.0.x.20260630-SNAPSHOT</spring-ai-hermes.version>
     </properties>
 
     <dependencies>
@@ -85,6 +85,15 @@
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-autoconfigure</artifactId>
+        </dependency>
+        <!-- Spring Boot 4 separates HTTP client auto-configuration into dedicated modules. -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-restclient</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-webclient</artifactId>
         </dependency>
 
         <!-- Spring AI Hermes Core -->

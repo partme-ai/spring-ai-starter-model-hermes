@@ -15,7 +15,7 @@ Spring Boot auto-configuration for the `spring-ai-hermes` model adapter.
 <dependency>
     <groupId>io.github.partmeai</groupId>
     <artifactId>spring-ai-starter-model-hermes</artifactId>
-    <version>3.5.x.20260630-SNAPSHOT</version>
+    <version>4.1.x.20260630-SNAPSHOT</version>
 </dependency>
 ```
 
