@@ -74,7 +74,7 @@ public class HermesSpringAiAutoConfiguration {
      *
      * @param hermesApiProvider Hermes HTTP API 客户端
      * @param properties 默认模型与会话配置
-     * @param observationRegistryProvider Spring AI 工具调用管理器
+     * @param observationRegistryProvider Micrometer 观测注册表
      * @param toolCallingManagerProvider Spring AI 工具调用管理器
      * @return 配置完成的 Hermes 聊天模型
      */
