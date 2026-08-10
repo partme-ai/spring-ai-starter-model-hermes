@@ -5,15 +5,15 @@
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
-        <version>3.5.0</version>
+        <version>3.5.5</version>
         <relativePath />
     </parent>
 
     <groupId>io.github.partmeai</groupId>
-    <artifactId>spring-ai-starter-model-openclaw</artifactId>
-    <version>3.5.x.20260623-SNAPSHOT</version>
+    <artifactId>spring-ai-starter-model-hermes</artifactId>
+    <version>3.5.x.20260630-SNAPSHOT</version>
     <name>${project.groupId}:${project.artifactId}</name>
-    <description>Spring Boot Starter for Spring AI OpenClaw Model (Chat Completions + Responses APIs)</description>
+    <description>Spring Boot Starter for Spring AI Hermes Model</description>
     <url>https://github.com/partme-ai/${project.artifactId}</url>
     <packaging>jar</packaging>
 
@@ -48,7 +48,8 @@
     <properties>
 
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <spring-ai-openclaw.version>3.5.x.20260527-SNAPSHOT</spring-ai-openclaw.version>
+        <maven.compiler.proc>full</maven.compiler.proc>
+        <spring-ai-hermes.version>1.0.x.20260630-SNAPSHOT</spring-ai-hermes.version>
     </properties>
 
     <dependencies>
@@ -86,12 +87,11 @@
             <artifactId>spring-boot-autoconfigure</artifactId>
         </dependency>
 
-        <!-- Spring AI OpenClaw Core -->
-        <!-- https://mvnrepository.com/artifact/io.github.partmeai/spring-ai-openclaw -->
+        <!-- Spring AI Hermes Core -->
         <dependency>
             <groupId>io.github.partmeai</groupId>
-            <artifactId>spring-ai-openclaw</artifactId>
-            <version>${spring-ai-openclaw.version}</version>
+            <artifactId>spring-ai-hermes</artifactId>
+            <version>${spring-ai-hermes.version}</version>
         </dependency>
 
     </dependencies>

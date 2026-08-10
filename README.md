@@ -1,173 +1,42 @@
-<a id="readme-top"></a>
-
-<div align="center">
-
 # spring-ai-starter-model-hermes
 
-**Spring Boot Starter for spring-ai-model-hermes**
+Spring Boot auto-configuration for the `spring-ai-hermes` model adapter.
 
-[![Maven Central](https://img.shields.io/maven-central/v/io.github.partmeai/spring-ai-starter-model-hermes)](https://github.com/partme-ai/spring-ai-starter-model-hermes)
-[![Java](https://img.shields.io/badge/Java-17-orange)](#3-requirements-and-compatibility)
-[![License](https://img.shields.io/badge/license-Apache-2.0-green)](https://www.apache.org/licenses/LICENSE-2.0)
+## Compatibility
 
-[简体中文](./README.zh-CN.md) | [English](./README.md)
+| Branch | Starter version | Spring Boot | Core adapter | Spring AI | JDK |
+|---|---|---|---|---|---|
+| `feature/3.5.x` | `3.5.x.20260630-SNAPSHOT` | `3.5.5` | `spring-ai-hermes:1.0.x.20260630-SNAPSHOT` | `1.1.7` | 17 |
+| `feature/4.1.x` | `4.1.x.20260630-SNAPSHOT` | `4.1.0` | `spring-ai-hermes:2.0.x.20260630-SNAPSHOT` | `2.0.0` | 17+ |
 
-[Positioning](#1-positioning) · [Capabilities](#2-core-capabilities) ·
-[Dependency](#5-dependency) · [Quick Start](#6-quick-start) ·
-[Configuration](#7-configuration-reference) · [Versions](#9-version-lines-and-compatibility) ·
-[Build](#10-build-and-test) · [License](#12-license)
-
-</div>
-
----
-
-> **Current Version**：`3.5.x.20260623-SNAPSHOT`<br>
-> **JDK Baseline**：`17`<br>
-> **Group ID**：`io.github.partmeai`<br>
-> **Artifact ID**：`spring-ai-starter-model-hermes`<br>
-> **License**：Apache License 2.0<br>
-
-## 1. Positioning
-
-**spring-ai-starter-model-hermes** is a Spring Boot starter that integrates **spring-ai-model-hermes** for applications using spring-ai-model-hermes. It provides auto-configuration, property binding, and ready-to-use beans so that applications can consume spring-ai-model-hermes capabilities with minimal setup.
-
-| Dimension | Description |
-|---|---|
-| Type | Spring Boot Starter |
-| Consumers | Spring Boot applications using spring-ai-model-hermes |
-| Core Capabilities | auto-configuration, property binding, ready-to-use beans for spring-ai-model-hermes |
-| JDK | `17` |
-| Coordinates | `io.github.partmeai:spring-ai-starter-model-hermes:3.5.x.20260623-SNAPSHOT` |
-| Config Prefix | `spring.ai.model.hermes` |
-
-## 2. Core Capabilities
-
-| Capability | Status | Description |
-|---|:---:|---|
-| Auto-configuration | ✅ Stable | Registers spring-ai-model-hermes beans automatically |
-| Property Binding | ✅ Stable | Binds `spring.ai.model.hermes.*` to `OpenClawSpringAiProperties` |
-| `OpenClawApi` bean | ✅ Stable | Auto-registered via OpenClawSpringAiAutoConfiguration |
-
-## 3. Requirements and Compatibility
-
-| Dependency | Minimum | Evidence |
-|---|---:|---|
-| JDK | `17` | `pom.xml` |
-| Spring Boot | `3.5.0` | `pom.xml` parent |
-| Maven | `3.6+` | Maven Enforcer |
-
-## 4. Auto-configuration
-
-The starter auto-configures the following beans:
-
-| Bean | Condition | Missing Behavior |
-|---|---|---|
-| `OpenClawApi` | classpath + property | not created |
-| `OpenClawResponsesApi` | classpath + property | not created |
-| `OpenClawChatOptions` | classpath + property | not created |
-| `ChatModel` | classpath + property | not created |
-| `EmbeddingModel` | classpath + property | not created |
-| `OpenClawResponsesModel` | classpath + property | not created |
-
-Auto-configuration registration:
-
-- `META-INF/spring/org.springframework.boot.autoconfigure.AutoConfiguration.imports` (Spring Boot 2.7+ / 3.x / 4.x)
-- `META-INF/spring.factories` (Spring Boot 2.x legacy)
-
-## 5. Dependency
+## Dependency
 
 ```xml
 <dependency>
     <groupId>io.github.partmeai</groupId>
     <artifactId>spring-ai-starter-model-hermes</artifactId>
-    <version>3.5.x.20260623-SNAPSHOT</version>
+    <version>3.5.x.20260630-SNAPSHOT</version>
 </dependency>
 ```
 
-No additional easy4j component dependencies.
-
-## 6. Quick Start
-
-### 6.1 Add dependency
-
-Add the dependency above to your `pom.xml`.
-
-### 6.2 Configure
+## Configuration
 
 ```yaml
-spring.ai.model.hermes:
+spring.ai.hermes:
   enabled: true
+  base-url: http://localhost:8080
+  api-server-key: ${HERMES_API_KEY:}
+  model: default
+  session-key: optional-memory-scope
+  session-id: optional-session-id
 ```
 
-### 6.3 Use the bean
+The starter conditionally registers `HermesApi`, `HermesChatModel`, and
+`HermesModelManager`. User-provided beans take precedence.
 
-```java
-@SpringBootApplication
-public class Application {
-    public static void main(String[] args) {
-        SpringApplication.run(Application.class, args);
-    }
-}
-```
-
-Then inject the auto-configured bean in your code:
-
-```java
-@Autowired
-private OpenClawApi openClawApi;
-```
-
-## 7. Configuration Reference
-
-### 7.1 Config Prefix
-
-`spring.ai.model.hermes`
-
-### 7.2 Configuration Items
-
-| Property | Type | Default | Required | Description | Sensitive |
-|---|---|---|:---:|---|:---:|
-| `spring.ai.model.hermes.enabled` | boolean | `true` | No | Enable the starter | No |
-<!-- additional properties below -->
-
-## 8. Version Lines and Compatibility
-
-| Branch | JDK | Spring Boot | Component Version | Status |
-|---|---:|---:|---|:---:|
-| `2.3.x` / `2.7.x` | `8+` | 2.3.x / 2.7.x | `1.0.x` | Maintenance |
-| `3.0.x` ~ `3.5.x` | `17` | 3.x | `2.0.x` | Maintenance |
-| `4.0.x` / `4.1.x` | `17+` | 4.x | `3.0.x` | Active |
-
-## 9. Build and Test
+## Build
 
 ```bash
 mvn clean verify
-mvn -pl spring-ai-starter-model-hermes -am test
+mvn javadoc:javadoc
 ```
-
-## 10. Troubleshooting
-
-| Symptom | Diagnosis | Resolution |
-|---|---|---|
-| Bean not created | Check auto-configuration report | Verify `spring.ai.model.hermes.enabled=true` and classpath |
-| `ClassNotFoundException` | Missing dependency | Add the required module |
-| Version conflict | `mvn dependency:tree` | Use BOM for version alignment |
-
-## 11. Contribution
-
-1. Fork the repository.
-2. Create a feature branch.
-3. Run `mvn clean verify` before submitting.
-4. Submit a pull request.
-
-## 12. License
-
-This project is licensed under the [Apache License, Version 2.0](https://www.apache.org/licenses/LICENSE-2.0).
-
----
-
-<div align="center">
-
-[Back to top](#readme-top) · [Issues](https://github.com/partme-ai/spring-ai-starter-model-hermes/issues) · [Repository](https://github.com/partme-ai/spring-ai-starter-model-hermes)
-
-</div>
